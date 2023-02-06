@@ -1,6 +1,7 @@
 package topgoSelenium.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,6 +23,23 @@ public class DriverHomePage {
         this.webDriver = driver;
 
         PageFactory.initElements(driver,this);
+    }
+    public void goOnline()
+    {
+        toggleSlider.click();
+    }
+
+    public boolean waitForAccept()
+    {
+        WebElement button;
+        try {
+             button = (new WebDriverWait(webDriver, 10))
+                    .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='mat-button-wrapper' and text()='Accept']")));
+        } catch (TimeoutException e) {
+            return false;
+        }
+        button.click();
+        return true;
     }
 
 
