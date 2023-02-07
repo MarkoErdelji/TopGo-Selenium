@@ -48,6 +48,20 @@ public class PassengerHomePage {
             return false;
         }
     }
+
+    public void clickCancelReview(){
+        WebElement cancelReviewButton = new WebDriverWait(webDriver,10).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#dialog-review #cancel-btn")));
+        cancelReviewButton.click();
+    }
+    public boolean isReviewDialogUp(){
+        try {
+            WebElement ride = (new WebDriverWait(webDriver, 10))
+                    .until(ExpectedConditions.visibilityOfElementLocated(By.id("dialog-review")));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
     public void selectStandard()
     {
         WebElement select = (new WebDriverWait(webDriver, 10))

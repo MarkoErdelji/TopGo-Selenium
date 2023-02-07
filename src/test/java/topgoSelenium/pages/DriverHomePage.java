@@ -42,10 +42,25 @@ public class DriverHomePage {
         return true;
     }
 
+    public boolean isRouteLoaded() {
+        try {
+            WebElement marker = (new WebDriverWait(webDriver, 10))
+                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='assets/destination-marker.png']")));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
 
+    public void endRide(){
+        WebElement endButton = new WebDriverWait(webDriver,10).until(ExpectedConditions.presenceOfElementLocated(By.id("end-btn")));
+        endButton.click();
+    }
 
-
-
+    public void startRide(){
+        WebElement startButton = new WebDriverWait(webDriver,10).until(ExpectedConditions.elementToBeClickable(this.webDriver.findElement(By.id("start-btn"))));
+        startButton.click();
+    }
 
     public void logout(){
         WebElement logoutButton = new WebDriverWait(webDriver,10).until(ExpectedConditions.elementToBeClickable(this.webDriver.findElement(By.id("logout"))));
